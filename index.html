@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Legend Rajveer · Solo Motorcycle Journeys Across India</title>
+<meta name="description" content="Solo motorcycle adventures from Kashmir to Kanyakumari, Spiti to Nepal. Day-by-day journals, fuel maps, and ride videos from Rajveer.">
+<link rel="canonical" href="https://thelegendrajveer.com/">
+<meta property="og:title" content="The Legend Rajveer">
+<meta property="og:description" content="Solo motorcycle adventures across India and beyond.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<style>
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  padding: 8rem 2.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  animation: slideUp 0.8s 0.2s forwards;
+}
+.hero-meta::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--rust), transparent);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: slideUp 1s 0.4s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--rust);
+  position: relative;
+  display: inline-block;
+}
+.hero h1 em::after {
+  content: '';
+  position: absolute;
+  bottom: 0.1em;
+  left: -2%;
+  width: 104%;
+  height: 0.08em;
+  background: var(--ochre);
+  opacity: 0.5;
+  transform: skewY(-2deg);
+}
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--ink-muted);
+  line-height: 1.65;
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+  opacity: 0;
+  animation: slideUp 1s 0.6s forwards;
+}
+.hero-cta {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  opacity: 0;
+  animation: slideUp 1s 0.8s forwards;
+}
+.hero-visual {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  opacity: 0;
+  animation: fadeIn 1.4s 0.6s forwards;
+}
+.mountain-svg { width: 100%; height: 100%; }
+.stamp {
+  position: absolute;
+  top: 8%; right: 5%;
+  width: 140px; height: 140px;
+  border: 2px solid var(--rust);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rust);
+  font-family: var(--serif);
+  font-style: italic;
+  transform: rotate(-12deg);
+  background: rgba(245, 240, 230, 0.6);
+  backdrop-filter: blur(4px);
+  animation: spin-slow 30s linear infinite;
+  z-index: 5;
+}
+.stamp::before, .stamp::after {
+  content: '';
+  position: absolute;
+  border: 1px dashed var(--rust);
+  border-radius: 50%;
+  opacity: 0.4;
+}
+.stamp::before { inset: 6px; }
+.stamp::after { inset: 12px; }
+.stamp-inner {
+  text-align: center;
+  animation: spin-slow 30s linear infinite reverse;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: var(--sans);
+  font-style: normal;
+}
+.stamp-inner strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* ── STATS BAR ───────────────────────────────────────────────── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 3rem 2.5rem;
+  background: var(--ink);
+  color: var(--bg-cream);
+  border-top: 1px solid var(--rust);
+  border-bottom: 1px solid var(--rust);
+  position: relative;
+}
+.stats-bar::before, .stats-bar::after {
+  content: '✦';
+  position: absolute;
+  color: var(--rust);
+  font-size: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.stats-bar::before { left: 1rem; }
+.stats-bar::after { right: 1rem; }
+.stat {
+  text-align: center;
+  border-right: 1px solid rgba(255, 253, 247, 0.15);
+  padding: 0 1rem;
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ochre);
+  letter-spacing: -0.02em;
+}
+.stat-num span { font-size: 0.5em; color: var(--bg-cream); margin-left: 0.2em; }
+.stat-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+  opacity: 0.7;
+}
+
+/* ── INDIA MAP ───────────────────────────────────────────────── */
+.map-section {
+  background: var(--bg-warm);
+  padding: 8rem 2.5rem;
+}
+.map-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: center;
+}
+.map-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+.map-text h2 em { font-style: italic; color: var(--rust); }
+.map-text p {
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  margin-bottom: 1.5rem;
+}
+.route-legend { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.85rem; }
+.route-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: padding 0.3s;
+}
+.route-item:hover { padding-left: 0.5rem; }
+.route-color {
+  width: 36px; height: 4px;
+  flex-shrink: 0;
+}
+.route-name {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--ink);
+  flex: 1;
+}
+.route-km {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+.map-svg-wrap {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+}
+.map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.map-route {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+  transition: stroke-width 0.3s, opacity 0.3s;
+}
+.map-route.dimmed { opacity: 0.15; }
+.map-route.highlight { stroke-width: 4; opacity: 1; }
+.city-dot {
+  fill: var(--ink);
+  transition: r 0.3s;
+}
+.city-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  fill: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+/* ── JOURNEYS ────────────────────────────────────────────────── */
+.journeys { background: var(--bg-cream); }
+.journey-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+.journey-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.journey-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(26, 26, 26, 0.12);
+  border-color: var(--rust);
+}
+.journey-card a { display: flex; flex-direction: column; height: 100%; }
+.journey-visual { height: 320px; position: relative; overflow: hidden; }
+.journey-visual svg { width: 100%; height: 100%; transition: transform 0.8s ease; }
+.journey-card:hover .journey-visual svg { transform: scale(1.08); }
+.journey-tag {
+  position: absolute;
+  top: 1.5rem; left: 1.5rem;
+  background: var(--paper);
+  color: var(--rust);
+  padding: 0.4rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  z-index: 2;
+  border: 1px solid var(--line);
+}
+.journey-videos-badge {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  background: var(--ink);
+  color: var(--ochre);
+  padding: 0.4rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.journey-videos-badge::before {
+  content: '▶';
+  font-size: 0.6rem;
+}
+.journey-body { padding: 2rem 1.75rem 2rem; flex: 1; display: flex; flex-direction: column; }
+.journey-num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.75rem;
+}
+.journey-title {
+  font-family: var(--serif);
+  font-size: 1.95rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.015em;
+}
+.journey-title em { font-style: italic; font-weight: 400; }
+.journey-desc { font-size: 0.95rem; color: var(--ink-muted); margin-bottom: 1.5rem; flex: 1; }
+.journey-meta {
+  display: flex;
+  gap: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+}
+.journey-meta strong { color: var(--ink); font-weight: 600; }
+.journey-read {
+  position: absolute;
+  bottom: 1.5rem; right: 1.5rem;
+  width: 42px; height: 42px;
+  background: var(--ink);
+  color: var(--bg-cream);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.4s;
+}
+.journey-card:hover .journey-read { background: var(--rust); transform: rotate(45deg); }
+
+/* ── ABOUT ────────────────────────────────────────────────────── */
+.about {
+  background: var(--bg-warm);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8rem 2.5rem;
+}
+.about-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+.about-text h2 em { font-style: italic; color: var(--rust); }
+.about-text p {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+  line-height: 1.75;
+}
+.about-text p:first-of-type::first-letter {
+  font-family: var(--serif);
+  font-size: 4em;
+  float: left;
+  line-height: 0.85;
+  padding: 0.05em 0.1em 0 0;
+  color: var(--rust);
+  font-weight: 500;
+}
+.signature {
+  margin-top: 2.5rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.4rem;
+}
+.signature span {
+  display: block;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 0.5rem;
+}
+.about-quote {
+  background: var(--paper);
+  padding: 3rem;
+  border-left: 3px solid var(--rust);
+  position: relative;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.about-quote::before {
+  content: '"';
+  position: absolute;
+  top: -0.5rem; left: 1rem;
+  font-size: 5rem;
+  color: var(--rust);
+  opacity: 0.2;
+  font-family: var(--serif);
+  line-height: 1;
+}
+.quote-attr {
+  margin-top: 1.5rem;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2rem; }
+  .hero-visual { height: 50vh; min-height: 350px; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 2rem 0; padding: 2.5rem 1rem; }
+  .stat:nth-child(2) { border-right: none; }
+  .map-container { grid-template-columns: 1fr; gap: 2.5rem; }
+  .journey-grid { grid-template-columns: 1fr; }
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .stamp { width: 100px; height: 100px; }
+  .stamp-inner strong { font-size: 1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="index.html" class="logo">The Legend Rajveer</a>
+  <ul class="nav-links">
+    <li><a href="#journeys">Journeys</a></li>
+    <li><a href="#map">Map</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-meta">
+      <span>Solo Rides</span>
+      <span>·</span>
+      <span>India & Beyond</span>
+    </div>
+    <h1>Where the road<br>ends, the <em>legend</em><br>begins.</h1>
+    <p class="hero-sub">Solo motorcycle journeys across India — from Kashmir to Kanyakumari, the Spiti high desert, Nepal Himalayas, and the long road to Puri. Day-by-day journals, fuel maps, and the kind of routes you can't find on Google.</p>
+    <div class="hero-cta">
+      <a href="#journeys" class="btn btn-primary">Explore Journeys <span class="arrow">→</span></a>
+      <a href="#about" class="btn btn-ghost">About Rajveer</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="stamp">
+      <div class="stamp-inner">
+        Solo<br><strong>44</strong>videos<br>· 4 epic rides ·
+      </div>
+    </div>
+    <svg class="mountain-svg" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#F5E6D3" />
+          <stop offset="50%" stop-color="#E8C8A8" />
+          <stop offset="100%" stop-color="#D9A074" />
+        </linearGradient>
+        <linearGradient id="back-mtn" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#A6907A" />
+          <stop offset="100%" stop-color="#6B5A47" />
+        </linearGradient>
+        <linearGradient id="mid-mtn" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#7A6450" />
+          <stop offset="100%" stop-color="#3D3025" />
+        </linearGradient>
+        <linearGradient id="front-mtn" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#4A3C30" />
+          <stop offset="100%" stop-color="#1F1810" />
+        </linearGradient>
+      </defs>
+      <rect width="600" height="700" fill="url(#sky)" />
+      <circle cx="430" cy="220" r="60" fill="#E89B5C" opacity="0.85" />
+      <circle cx="430" cy="220" r="90" fill="#E89B5C" opacity="0.2" />
+      <circle cx="430" cy="220" r="130" fill="#E89B5C" opacity="0.08" />
+      <path d="M 150 180 Q 158 174 165 180 Q 172 174 180 180" stroke="#3D3025" stroke-width="2" fill="none" />
+      <path d="M 200 200 Q 206 195 212 200 Q 218 195 224 200" stroke="#3D3025" stroke-width="1.5" fill="none" />
+      <path d="M 250 175 Q 256 171 261 175 Q 266 171 272 175" stroke="#3D3025" stroke-width="1.5" fill="none" />
+      <path d="M 0 450 L 80 380 L 130 410 L 200 320 L 270 380 L 340 290 L 410 360 L 480 310 L 560 380 L 600 350 L 600 700 L 0 700 Z" fill="url(#back-mtn)" opacity="0.6" />
+      <path d="M 200 320 L 230 340 L 215 345 L 200 320" fill="#FAF6EC" opacity="0.7" />
+      <path d="M 340 290 L 370 320 L 350 325 L 340 290" fill="#FAF6EC" opacity="0.7" />
+      <path d="M 480 310 L 510 340 L 495 345 L 480 310" fill="#FAF6EC" opacity="0.7" />
+      <path d="M 0 520 L 60 470 L 140 510 L 230 420 L 320 490 L 400 410 L 490 480 L 600 440 L 600 700 L 0 700 Z" fill="url(#mid-mtn)" opacity="0.9" />
+      <path d="M 0 600 L 70 560 L 160 590 L 250 540 L 350 580 L 450 545 L 540 575 L 600 555 L 600 700 L 0 700 Z" fill="url(#front-mtn)" />
+      <g fill="#1A1810">
+        <path d="M 80 600 L 85 580 L 90 600 Z M 85 580 L 90 590 L 95 580 L 90 595 Z" />
+        <path d="M 130 615 L 135 590 L 140 615 Z" />
+        <path d="M 460 595 L 465 575 L 470 595 Z" />
+        <path d="M 510 605 L 515 585 L 520 605 Z" />
+      </g>
+      <g transform="translate(280, 620)">
+        <ellipse cx="0" cy="20" rx="22" ry="3" fill="#000" opacity="0.3" />
+        <line x1="-15" y1="10" x2="15" y2="10" stroke="#1F1810" stroke-width="3" />
+        <circle cx="-12" cy="15" r="6" fill="#1F1810" stroke="#A6452B" stroke-width="1.5" />
+        <circle cx="12" cy="15" r="6" fill="#1F1810" stroke="#A6452B" stroke-width="1.5" />
+        <circle cx="0" cy="-5" r="4" fill="#1F1810" />
+        <path d="M -4 -1 L 0 -10 L 4 -1 L 2 5 L -2 5 Z" fill="#A6452B" />
+        <line x1="-5" y1="0" x2="-10" y2="6" stroke="#1F1810" stroke-width="2" />
+        <line x1="5" y1="0" x2="10" y2="6" stroke="#1F1810" stroke-width="2" />
+      </g>
+      <path d="M 280 700 Q 290 680 285 660 Q 280 640 295 620" stroke="#FAF6EC" stroke-width="2" stroke-dasharray="6 4" opacity="0.6" fill="none" />
+    </svg>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">25<span>K+</span></div>
+    <div class="stat-label">KM Across India</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4<span>+</span></div>
+    <div class="stat-label">Epic Journeys</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">44<span></span></div>
+    <div class="stat-label">Ride Videos</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5,602<span>m</span></div>
+    <div class="stat-label">Khardung La Peak</div>
+  </div>
+</div>
+
+<!-- INTERACTIVE MAP -->
+<section class="map-section" id="map">
+  <div class="map-container">
+    <div class="map-text scroll-reveal">
+      <div class="eyebrow">The Atlas</div>
+      <h2>Routes drawn across <em>India</em>.</h2>
+      <p>Four major journeys traced on a single map. Hover any route on the right (or any name below) to highlight it. Each line is a real ride — every kilometre logged, every fuel stop noted.</p>
+      <div class="route-legend">
+        <div class="route-item" data-route="k2k">
+          <div class="route-color" style="background:#A6452B"></div>
+          <div class="route-name">Kashmir → Kanyakumari</div>
+          <div class="route-km">~3,800 km</div>
+        </div>
+        <div class="route-item" data-route="spiti">
+          <div class="route-color" style="background:#1F3A5F"></div>
+          <div class="route-name">Mumbai → Spiti</div>
+          <div class="route-km">~5,200 km</div>
+        </div>
+        <div class="route-item" data-route="nepal">
+          <div class="route-color" style="background:#4A5D3A"></div>
+          <div class="route-name">Nepal Off-Road</div>
+          <div class="route-km">~4,400 km</div>
+        </div>
+        <div class="route-item" data-route="puri">
+          <div class="route-color" style="background:#C68B1F"></div>
+          <div class="route-name">Mumbai → Puri → Mumbai</div>
+          <div class="route-km">~3,400 km</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-svg-wrap scroll-reveal">
+      <svg class="map-svg" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+        <!-- Simplified India outline -->
+        <path d="M 160 60 L 200 50 L 240 55 L 280 70 L 310 80 L 340 90 L 360 110 L 380 130 L 395 160 L 405 195 L 415 230 L 410 270 L 400 310 L 390 350 L 375 390 L 350 420 L 320 450 L 290 480 L 255 510 L 220 535 L 200 560 L 175 570 L 165 555 L 175 525 L 170 495 L 155 470 L 140 445 L 130 420 L 125 395 L 115 365 L 105 335 L 100 305 L 95 275 L 100 245 L 110 215 L 115 185 L 125 155 L 135 125 L 145 95 Z"
+              fill="#EBE3D2" stroke="#D4C9B5" stroke-width="1.5" />
+
+        <!-- Route 1: K2K (Kashmir to Kanyakumari) -->
+        <path class="map-route" id="route-k2k" d="M 170 75 Q 180 100 175 130 Q 170 165 195 190 Q 220 215 240 250 Q 255 290 250 330 Q 245 370 235 410 Q 225 450 210 490 Q 200 525 195 550"
+              stroke="#A6452B" />
+
+        <!-- Route 2: Mumbai to Spiti -->
+        <path class="map-route" id="route-spiti" d="M 195 425 Q 175 380 165 330 Q 158 280 175 230 Q 195 180 215 145 Q 235 115 240 90"
+              stroke="#1F3A5F" />
+
+        <!-- Route 3: Nepal -->
+        <path class="map-route" id="route-nepal" d="M 195 425 Q 215 395 245 380 Q 280 365 315 350 Q 345 330 360 305 Q 365 280 355 255 Q 345 235 320 230"
+              stroke="#4A5D3A" />
+
+        <!-- Route 4: Mumbai to Puri -->
+        <path class="map-route" id="route-puri" d="M 195 425 Q 230 425 270 430 Q 305 435 335 425 Q 360 415 380 395"
+              stroke="#C68B1F" />
+
+        <!-- Cities -->
+        <g>
+          <!-- Mumbai -->
+          <circle class="city-dot" cx="195" cy="425" r="4" fill="#1A1A1A" />
+          <text class="city-label" x="155" y="430">MUMBAI</text>
+          <!-- Srinagar (Kashmir) -->
+          <circle class="city-dot" cx="170" cy="75" r="4" fill="#1A1A1A" />
+          <text class="city-label" x="115" y="78">SRINAGAR</text>
+          <!-- Kanyakumari -->
+          <circle class="city-dot" cx="195" cy="550" r="4" fill="#1A1A1A" />
+          <text class="city-label" x="115" y="554">KANYAKUMARI</text>
+          <!-- Spiti -->
+          <circle class="city-dot" cx="240" cy="90" r="4" fill="#1A1A1A" />
+          <text class="city-label" x="246" y="93">SPITI</text>
+          <!-- Kathmandu (Nepal) -->
+          <circle class="city-dot" cx="320" cy="230" r="4" fill="#1A1A1A" />
+          <text class="city-label" x="326" y="233">KATHMANDU</text>
+          <!-- Puri -->
+          <circle class="city-dot" cx="380" cy="395" r="4" fill="#1A1A1A" />
+          <text class="city-label" x="386" y="398">PURI</text>
+          <!-- Delhi -->
+          <circle class="city-dot" cx="225" cy="155" r="3" fill="#6B6359" />
+          <text class="city-label" x="231" y="158" fill="#6B6359">DELHI</text>
+        </g>
+
+        <!-- Compass -->
+        <g transform="translate(450, 80)">
+          <circle r="22" fill="none" stroke="#A6452B" stroke-width="1" opacity="0.6" />
+          <path d="M 0 -18 L 4 0 L 0 18 L -4 0 Z" fill="#A6452B" opacity="0.7" />
+          <text x="0" y="-26" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#A6452B">N</text>
+        </g>
+
+        <!-- Decorative scale -->
+        <g transform="translate(380, 560)">
+          <line x1="0" y1="0" x2="60" y2="0" stroke="#6B6359" stroke-width="1" />
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="#6B6359" stroke-width="1" />
+          <line x1="30" y1="-3" x2="30" y2="3" stroke="#6B6359" stroke-width="1" />
+          <line x1="60" y1="-4" x2="60" y2="4" stroke="#6B6359" stroke-width="1" />
+          <text x="30" y="14" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#6B6359">~500 KM</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEYS -->
+<section class="journeys" id="journeys">
+  <div class="section-head scroll-reveal">
+    <div class="eyebrow">The Logbook · No. 01</div>
+    <h2 class="section-title">Four rides, four <em>continents</em> of memory. Each told in field notes, fuel stops, and video diaries.</h2>
+  </div>
+
+  <div class="journey-grid">
+
+    <!-- K2K -->
+    <article class="journey-card scroll-reveal">
+      <a href="trips/k2k.html">
+        <div class="journey-visual">
+          <div class="journey-tag">Kashmir → Kanyakumari</div>
+          <div class="journey-videos-badge">7 Episodes</div>
+          <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="k2k-sky" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#1F3A5F" />
+                <stop offset="60%" stop-color="#A6452B" />
+                <stop offset="100%" stop-color="#E89B5C" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="320" fill="url(#k2k-sky)" />
+            <!-- Mountain to coast progression -->
+            <path d="M 0 80 L 30 40 L 60 70 L 90 35 L 130 75 L 170 60 L 200 110 L 200 320 L 0 320 Z" fill="#3D3025" opacity="0.75" />
+            <path d="M 60 70 L 75 90 L 60 95 Z" fill="#FAF6EC" opacity="0.85" />
+            <path d="M 90 35 L 110 60 L 90 65 Z" fill="#FAF6EC" opacity="0.85" />
+            <!-- Sea -->
+            <rect x="200" y="180" width="200" height="140" fill="#1F3A5F" opacity="0.85" />
+            <ellipse cx="320" cy="175" rx="40" ry="40" fill="#F5D080" />
+            <ellipse cx="320" cy="210" rx="50" ry="2.5" fill="#F5D080" opacity="0.6" />
+            <ellipse cx="320" cy="225" rx="40" ry="2" fill="#F5D080" opacity="0.4" />
+            <!-- Path -->
+            <path d="M 100 230 Q 200 200 300 220" stroke="#FAF6EC" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7" fill="none" />
+          </svg>
+        </div>
+        <div class="journey-body">
+          <div class="journey-num">№ 01 · K2K Adventure</div>
+          <h3 class="journey-title">Kashmir to <em>Kanyakumari</em></h3>
+          <p class="journey-desc">The legendary tip-to-tip of India — from the snow valleys of Srinagar to the southernmost rock at Kanyakumari where three seas meet. The ultimate Indian motorcycle pilgrimage.</p>
+          <div class="journey-meta">
+            <span><strong>~3,800</strong> km</span>
+            <span><strong>7</strong> episodes</span>
+            <span><strong>3</strong> seas</span>
+          </div>
+          <div class="journey-read">→</div>
+        </div>
+      </a>
+    </article>
+
+    <!-- SPITI -->
+    <article class="journey-card scroll-reveal">
+      <a href="trips/spiti.html">
+        <div class="journey-visual">
+          <div class="journey-tag">Mumbai → Spiti Valley</div>
+          <div class="journey-videos-badge">17 Episodes</div>
+          <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="spiti-sky" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#4A6FA5" />
+                <stop offset="100%" stop-color="#D9C49E" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="320" fill="url(#spiti-sky)" />
+            <circle cx="80" cy="80" r="30" fill="#E89B5C" opacity="0.9" />
+            <circle cx="80" cy="80" r="50" fill="#E89B5C" opacity="0.2" />
+            <path d="M 0 180 L 60 60 L 120 130 L 180 30 L 250 110 L 320 50 L 400 100 L 400 320 L 0 320 Z" fill="#7A6450" />
+            <path d="M 60 60 L 80 95 L 60 100 L 50 90 Z" fill="#FFFDF7" />
+            <path d="M 180 30 L 205 75 L 180 80 L 165 70 Z" fill="#FFFDF7" />
+            <path d="M 320 50 L 345 95 L 320 100 L 305 90 Z" fill="#FFFDF7" />
+            <!-- Tibetan monastery silhouette -->
+            <g transform="translate(220, 190)" fill="#1F1810">
+              <rect x="-15" y="0" width="30" height="40" />
+              <path d="M -18 0 L 0 -15 L 18 0 Z" fill="#A6452B" />
+              <rect x="-5" y="15" width="10" height="15" fill="#FAF6EC" opacity="0.5" />
+            </g>
+            <!-- Prayer flags -->
+            <g stroke="#1F1810" stroke-width="1" opacity="0.7">
+              <line x1="120" y1="200" x2="280" y2="190" />
+              <rect x="140" y="192" width="8" height="10" fill="#A6452B" />
+              <rect x="155" y="193" width="8" height="10" fill="#4A5D3A" />
+              <rect x="170" y="194" width="8" height="10" fill="#C68B1F" />
+              <rect x="185" y="195" width="8" height="10" fill="#1F3A5F" />
+              <rect x="200" y="194" width="8" height="10" fill="#FAF6EC" />
+              <rect x="215" y="193" width="8" height="10" fill="#A6452B" />
+              <rect x="230" y="192" width="8" height="10" fill="#4A5D3A" />
+            </g>
+            <path d="M 0 280 L 80 270 L 160 285 L 240 275 L 320 290 L 400 280 L 400 320 L 0 320 Z" fill="#3D3025" />
+          </svg>
+        </div>
+        <div class="journey-body">
+          <div class="journey-num">№ 02 · The High Desert</div>
+          <h3 class="journey-title">Mumbai to <em>Spiti</em></h3>
+          <p class="journey-desc">Mumbai across the plains, up through Manali and into the lunar landscape of Spiti Valley. Buddhist monasteries, lone mud villages, and the world's highest motorable roads.</p>
+          <div class="journey-meta">
+            <span><strong>~5,200</strong> km</span>
+            <span><strong>17</strong> episodes</span>
+            <span><strong>4,551 m</strong> Kunzum La</span>
+          </div>
+          <div class="journey-read">→</div>
+        </div>
+      </a>
+    </article>
+
+    <!-- NEPAL -->
+    <article class="journey-card scroll-reveal">
+      <a href="trips/nepal.html">
+        <div class="journey-visual">
+          <div class="journey-tag">Nepal · BUTR International</div>
+          <div class="journey-videos-badge">15 Episodes</div>
+          <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="nepal-sky" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#1F3A5F" />
+                <stop offset="50%" stop-color="#4A5D7A" />
+                <stop offset="100%" stop-color="#A6907A" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="320" fill="url(#nepal-sky)" />
+            <!-- Stars -->
+            <g fill="#FFFDF7">
+              <circle cx="50" cy="40" r="1" />
+              <circle cx="120" cy="60" r="1.2" />
+              <circle cx="200" cy="40" r="1" />
+              <circle cx="280" cy="55" r="1.3" />
+              <circle cx="340" cy="30" r="1" />
+            </g>
+            <!-- Moon -->
+            <circle cx="340" cy="80" r="20" fill="#FAF6EC" />
+            <circle cx="332" cy="76" r="20" fill="#1F3A5F" />
+            <!-- Big Himalaya peaks -->
+            <path d="M 0 200 L 50 100 L 110 160 L 160 70 L 210 140 L 270 80 L 320 150 L 380 100 L 400 130 L 400 320 L 0 320 Z" fill="#3D3025" />
+            <path d="M 50 100 L 75 140 L 50 145 L 35 135 Z" fill="#FFFDF7" />
+            <path d="M 160 70 L 190 120 L 160 125 L 140 110 Z" fill="#FFFDF7" />
+            <path d="M 270 80 L 300 125 L 270 130 L 250 115 Z" fill="#FFFDF7" />
+            <!-- Off-road dirt -->
+            <path d="M 0 260 L 50 245 L 130 270 L 200 250 L 280 275 L 360 255 L 400 270 L 400 320 L 0 320 Z" fill="#1F1810" />
+            <path d="M 30 290 Q 120 280 200 290 Q 290 295 380 285" stroke="#A6452B" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8" fill="none" />
+            <!-- Riders -->
+            <g transform="translate(160, 285)">
+              <line x1="-8" y1="-5" x2="8" y2="-5" stroke="#FAF6EC" stroke-width="1.5" />
+              <circle cx="-6" cy="-2" r="2.5" fill="#FAF6EC" />
+              <circle cx="6" cy="-2" r="2.5" fill="#FAF6EC" />
+            </g>
+            <g transform="translate(220, 282)">
+              <line x1="-8" y1="-5" x2="8" y2="-5" stroke="#C68B1F" stroke-width="1.5" />
+              <circle cx="-6" cy="-2" r="2.5" fill="#C68B1F" />
+              <circle cx="6" cy="-2" r="2.5" fill="#C68B1F" />
+            </g>
+          </svg>
+        </div>
+        <div class="journey-body">
+          <div class="journey-num">№ 03 · BUTR Group · International</div>
+          <h3 class="journey-title">Nepal <em>Off-Road</em></h3>
+          <p class="journey-desc">My first international ride. With the BUTR group through Nepal — extreme off-road, river crossings, mountain passes, and the kind of brotherhood only formed in the dust at 3,500 metres.</p>
+          <div class="journey-meta">
+            <span><strong>~4,400</strong> km</span>
+            <span><strong>15</strong> episodes</span>
+            <span><strong>1st</strong> intl. ride</span>
+          </div>
+          <div class="journey-read">→</div>
+        </div>
+      </a>
+    </article>
+
+    <!-- PURI -->
+    <article class="journey-card scroll-reveal">
+      <a href="trips/puri.html">
+        <div class="journey-visual">
+          <div class="journey-tag">Mumbai → Puri → Mumbai</div>
+          <div class="journey-videos-badge">5 Episodes</div>
+          <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="puri-sky" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#E89B5C" />
+                <stop offset="50%" stop-color="#C68B1F" />
+                <stop offset="100%" stop-color="#823621" />
+              </linearGradient>
+              <linearGradient id="puri-sea" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#1F3A5F" />
+                <stop offset="100%" stop-color="#0A1A2E" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="200" fill="url(#puri-sky)" />
+            <rect y="200" width="400" height="120" fill="url(#puri-sea)" />
+            <!-- Sun setting -->
+            <circle cx="200" cy="195" r="48" fill="#F5D080" />
+            <ellipse cx="200" cy="240" rx="55" ry="3" fill="#F5D080" opacity="0.6" />
+            <ellipse cx="200" cy="260" rx="45" ry="2" fill="#F5D080" opacity="0.4" />
+            <ellipse cx="200" cy="280" rx="35" ry="1.5" fill="#F5D080" opacity="0.3" />
+            <!-- Jagannath temple silhouette (Puri) -->
+            <g transform="translate(80, 175)" fill="#1A1810">
+              <path d="M -12 0 L -10 -20 L -8 -25 L -5 -30 L 0 -45 L 5 -30 L 8 -25 L 10 -20 L 12 0 Z" />
+              <rect x="-15" y="0" width="30" height="15" />
+              <rect x="-3" y="-50" width="6" height="8" fill="#C68B1F" />
+            </g>
+            <g transform="translate(320, 175)" fill="#1A1810">
+              <path d="M -10 0 L -8 -18 L 0 -35 L 8 -18 L 10 0 Z" />
+              <rect x="-12" y="0" width="24" height="12" />
+            </g>
+            <!-- Birds -->
+            <g stroke="#1F1810" stroke-width="1.5" fill="none">
+              <path d="M 60 60 Q 65 56 70 60 Q 75 56 80 60" />
+              <path d="M 280 80 Q 284 76 288 80 Q 292 76 296 80" />
+            </g>
+          </svg>
+        </div>
+        <div class="journey-body">
+          <div class="journey-num">№ 04 · The Eastern Run</div>
+          <h3 class="journey-title">Mumbai → <em>Puri</em> → Mumbai</h3>
+          <p class="journey-desc">Cross-country east coast push to Jagannath Puri — Mumbai through Maharashtra plains, Andhra coast, Odisha beaches, the magnificent Jagannath Temple, then the long ride home.</p>
+          <div class="journey-meta">
+            <span><strong>~3,400</strong> km</span>
+            <span><strong>5</strong> episodes</span>
+            <span><strong>1</strong> dham</span>
+          </div>
+          <div class="journey-read">→</div>
+        </div>
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text scroll-reveal">
+    <div class="eyebrow">The Journal · No. 02</div>
+    <h2>About <em>Rajveer</em>.</h2>
+    <p>The Legend Rajveer — solo motorcyclist, video diarist, member of the BUTR riding group. Based in Mumbai, riding wherever the road leads — from the lunar plateaus of Spiti to the temple coasts of Puri, from the Kashmir snowfields to the southern tip at Kanyakumari.</p>
+    <p>This site is the long-form companion to the YouTube channel. Each ride is documented in full — fuel stops, mountain weather, the dhaba where the chai tasted like petrol, the pass where the bike stalled in thin air. If even one rider plans a safer journey from these notes, it's worth it.</p>
+    <div class="signature">
+      The Legend Rajveer
+      <span>Solo Rider · BUTR · Mumbai</span>
+    </div>
+  </div>
+  <div class="about-quote scroll-reveal">
+    Every long ride teaches the same lesson in a new accent — that the road is more about what you carry inside than what you strap to the bike.
+    <div class="quote-attr">— Field notes · Nepal · BUTR ride</div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="contact">
+  <h3>Join the <em>logbook</em>. New rides, raw notes, before they hit YouTube.</h3>
+  <p>A quiet email when the next journey begins. No spam. Unsubscribe any time.</p>
+  <form class="newsletter-form">
+    <input type="email" placeholder="rider@email.com" required />
+    <button type="submit">Subscribe</button>
+  </form>
+  <div class="newsletter-success">✓ Welcome to the journey. Ride safe.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">The Legend Rajveer</div>
+  <div class="footer-tagline">Solo · Slow · Specific</div>
+  <div class="footer-bottom">
+    <div>© 2025 The Legend Rajveer · Mumbai, India · thelegendrajveer.com</div>
+    <div class="footer-socials">
+      <a href="https://www.youtube.com/@TheLegendRajveer" target="_blank" rel="noopener">YouTube</a>
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#contact">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// India Map interactive route highlighting
+document.querySelectorAll('.route-item').forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    const routeId = 'route-' + item.dataset.route;
+    document.querySelectorAll('.map-route').forEach(r => {
+      r.classList.add('dimmed');
+      r.classList.remove('highlight');
+    });
+    document.getElementById(routeId).classList.remove('dimmed');
+    document.getElementById(routeId).classList.add('highlight');
+  });
+  item.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.map-route').forEach(r => {
+      r.classList.remove('dimmed', 'highlight');
+    });
+  });
+});
+</script>
+</body>
+</html>

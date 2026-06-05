@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>404 — Off the Map · The Legend Rajveer</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400;1,500&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.lost {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.lost-num {
+  font-family: var(--serif);
+  font-size: clamp(8rem, 25vw, 16rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--rust);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  margin-bottom: 1rem;
+}
+.lost h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+.lost h1 em { font-style: italic; color: var(--rust); }
+.lost p {
+  font-size: 1.1rem;
+  color: var(--ink-muted);
+  max-width: 540px;
+  margin: 0 auto 2.5rem;
+}
+.lost-meta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 1rem;
+}
+</style>
+</head>
+<body>
+<div class="lost">
+  <div class="lost-meta">Coordinates not found</div>
+  <div class="lost-num">404</div>
+  <h1>This road doesn't exist <em>on the map</em>.</h1>
+  <p>Looks like you've ridden off the edge of the journey. The page you're looking for may have moved, or perhaps the road was never built. Either way — let's get you back to the trailhead.</p>
+  <a href="/" class="btn btn-primary">← Back to Home</a>
+</div>
+</body>
+</html>
